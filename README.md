@@ -1,9 +1,9 @@
 # wine-data-mining
-Repositório para os trabalhos da disciplina de (Mineração de Dados)[https://eic.cefet-rj.br/~eogasawara/data-mining/] do PPCIC.
+Repositório para os trabalhos da disciplina de [Mineração de Dados](https://eic.cefet-rj.br/~eogasawara/data-mining/) do PPCIC.
 
 ## Configuração inicial
 
-- Acesse o https://regulus.eic.cefet-rj.br/rstudio/
+- Acesse o rstudio
 - Abra o terminal
 - Configure acesso o Git com seu nome e e-mail institucional
     `git config --global user.name "Fulano de Tal"`
