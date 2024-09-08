@@ -11,3 +11,4 @@ Repositório para os trabalhos da disciplina de [Mineração de Dados](https://e
 - Configure a autenticação SSH com a sua conta no github https://docs.github.com/en/authentication/connecting-to-github-with-ssh
 - Clone o repositório `git@github.com:mmoura-dev/wine-data-mining.git`
 - Acesse a pasta do repositório `cd wine-data-mining`
+- Execute o comando `setwd("~/wine-data-mining")`
