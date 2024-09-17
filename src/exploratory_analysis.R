@@ -1,4 +1,5 @@
 library("daltoolbox")
+library(tidyr)
 library("dplyr")
 library("RColorBrewer")
 library("ggplot2")
@@ -14,27 +15,29 @@ load("data/flights/bfd_2023.rdata")
 head(bfd)
 summary(bfd)
 
-# Delay bigger than threshold
-filtered_df <- bfd %>% filter(delay_depart > 5)
-head(filtered_df)
-summary(filtered_df)
 
-# Adding label
-bfd <- bfd %>% mutate(bool_delay = delay_depart > 5)
+# Filters and label
+bfd <- bfd %>%
+  select(where(is.numeric)) %>%
+  drop_na() %>%
+  mutate(bool_delay = delay_depart > 5)
 
 
-# Density distribution
+# Probability density distribution
 X_column_names <- colnames(bfd)[1:length(bfd) - 1]
 create_plot_density_grf <- function(df, col_name, label_col_name) {
   num_unique_labels <- length(unique(df[[label_col_name]]))
-  return(plot_density_class(df %>% dplyr::select(label_col_name, col_name), 
+  plot <- plot_density_class(df %>% dplyr::select(label_col_name, col_name), 
                             class_label=label_col_name, label_x=col_name,
-                            color=colors[c(1:num_unique_labels)]) + font)
+                            color=colors[c(1:num_unique_labels)]) + font
+
+  ggsave(filename = paste0("plots/exploratory_analysis/probability_density_function/", col_name, ".pdf"), plot = plot)
+  return(plot)
 }
 
 grfs <- purrr::map(X_column_names,
                    purrr::partial(create_plot_density_grf, df = bfd,
                                   label_col_name = "bool_delay"))
 
-options(repr.plot.width=8, repr.plot.height=8)
-do.call(grid.arrange, as.list(grfs))
+# All plots together
+# do.call(grid.arrange, as.list(grfs))
