@@ -20,7 +20,7 @@ summary(bfd)
 bfd <- bfd %>%
   select(where(is.numeric)) %>%
   drop_na() %>%
-  mutate(bool_delay = delay_depart > 5)
+  mutate(bool_delay = delay_depart > 15)
 
 
 # Probability density distribution
@@ -31,7 +31,7 @@ create_plot_density_grf <- function(df, col_name, label_col_name) {
                             class_label=label_col_name, label_x=col_name,
                             color=colors[c(1:num_unique_labels)]) + font
 
-  ggsave(filename = paste0("plots/exploratory_analysis/probability_density_function/", col_name, ".pdf"), plot = plot)
+  ggsave(filename = paste0("plots/exploratory_analysis/probability_density_function_15m/", col_name, ".pdf"), plot = plot)
   return(plot)
 }
 
