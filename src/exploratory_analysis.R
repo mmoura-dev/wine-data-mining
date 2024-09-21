@@ -19,8 +19,9 @@ summary(bfd)
 # Filters and label
 bfd <- bfd %>%
   select(where(is.numeric)) %>%
-  drop_na() %>%
-  mutate(bool_delay = delay_depart > 15)
+  mutate(target = delay_depart > 15) %>%
+  select(-starts_with("arrival"), -starts_with("delay")) %>%
+  drop_na()
 
 
 # Probability density distribution
@@ -37,7 +38,7 @@ create_plot_density_grf <- function(df, col_name, label_col_name) {
 
 grfs <- purrr::map(X_column_names,
                    purrr::partial(create_plot_density_grf, df = bfd,
-                                  label_col_name = "bool_delay"))
+                                  label_col_name = "target"))
 
 # All plots together
-# do.call(grid.arrange, as.list(grfs))
+do.call(grid.arrange, as.list(grfs))
