@@ -1,3 +1,4 @@
+# setwd("~/wine-data-mining")
 library("daltoolbox")
 library(tidyr)
 library("dplyr")
@@ -47,4 +48,3 @@ test_prediction <- predict(model, df_test)
 df_test_predictand <- adjust_class_label(df_test[,"target"])
 test_eval <- evaluate(model, df_test_predictand, test_prediction)
 print(test_eval$metrics)
-
