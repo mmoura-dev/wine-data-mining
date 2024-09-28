@@ -1,0 +1,16 @@
+ expected_flight_length depart_air_temperature depart_dew_point depart_relative_humidity depart_wind_direction
+ Min.   : 40.0          Min.   : 9.00          Min.   :-2.0     Min.   : 13.18           Min.   :  0          
+ 1st Qu.:105.0          1st Qu.:18.00          1st Qu.:10.0     1st Qu.: 45.07           1st Qu.: 80          
+ Median :110.0          Median :22.00          Median :14.0     Median : 67.54           Median :120          
+ Mean   :120.5          Mean   :21.86          Mean   :13.5     Mean   : 63.47           Mean   :153          
+ 3rd Qu.:150.0          3rd Qu.:26.00          3rd Qu.:17.0     3rd Qu.: 82.62           3rd Qu.:240          
+ Max.   :240.0          Max.   :35.00          Max.   :24.0     Max.   :100.00           Max.   :360          
+                                                                                         NA's   :6574
+
+ depart_wind_speed depart_pressure depart_visibility depart_apparent_temperature
+ Min.   : 0.000    Min.   :29.85   Min.   :0.620     Min.   : 9.00              
+ 1st Qu.: 2.000    1st Qu.:30.03   1st Qu.:6.210     1st Qu.:18.00              
+ Median : 4.000    Median :30.09   Median :6.210     Median :22.00              
+ Mean   : 4.778    Mean   :30.09   Mean   :6.173     Mean   :21.76              
+ 3rd Qu.: 7.000    3rd Qu.:30.15   3rd Qu.:6.210     3rd Qu.:26.00              
+ Max.   :27.000    Max.   :34.28   Max.   :6.210     Max.   :33.48 

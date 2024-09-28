@@ -1,0 +1,17 @@
+    arrival         company          flight      di        type      depart_sky_coverage    depart_wind_speed_scale
+ SBSP   : 7430   TAM    :19251   3704   :  303   0:43097   C:  894   BKN : 3113          Light Air      :12661     
+ SBRJ   : 4669   GLO    :16517   3708   :  303   1:    2   G:    9   FEW :10265          Light Breeze   :11649     
+ SBGR   : 3664   AZU    : 6076   3720   :  301   2:   15   I:    2   NSC :   83          Gentle Breeze  : 9923     
+ SBCF   : 2514   SID    :  593   1403   :  300   7:   38   N:42269   OVC :   34          Calm           : 6387     
+ SBKP   : 2006   PTB    :  531   3714   :  299   9:   22             SCT :10060          Moderate Breeze: 2416     
+ SBRF   : 1854   MWM    :  179   5046   :  298                       NA's:19619          Fresh Breeze   :  117     
+ (Other):21037   (Other):   27   (Other):41370                                           (Other)        :   21 
+ 
+  depart_wind_direction_cat     depart_day_period   target     
+ E      : 7391             Night        : 1958   FALSE:37997  
+ ESE    : 3838             Early Morning:10870   TRUE : 5177  
+ N      : 3263             Mid Morning  : 8423                
+ W      : 3111             Late Morning : 1811                
+ ENE    : 3108             Afternoon    : 4830                
+ (Other):15889             Early Evening: 4235                
+ NA's   : 6574             Late Evening :11047 
