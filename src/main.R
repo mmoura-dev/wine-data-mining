@@ -6,32 +6,11 @@ library("ggplot2")
 library(gridExtra)
 library(tidyverse)
 source("https://raw.githubusercontent.com/eogasawara/mylibrary/master/tutorial/graphics_extra.R")
+source("src/flights_data.R")
 
 
-# Loads bfd data set
-load("data/flights/bfd_2023.rdata")
-# head(bfd)
-# summary(bfd)
-
-
-# Filters
-jk_flights <- bfd %>%
-  filter(depart == "SBBR") %>%
-  select(-c("route", "real_depart", "real_arrival", "delay_arrival", "real_flight_length"), -starts_with("arrival_"), -starts_with("outlier_")) %>%
-  select(where(~ !all(is.na(.)))) %>%
-  filter(status != "CANCELADO") %>%
-  mutate(target = delay_depart > 15) %>%
-  select(-status, -depart, -delay_depart)
-  
-
-# Factors (todo: is any of these factors ordered?)
-jk_flights$arrival <- as.factor(jk_flights$arrival)
-jk_flights$company <- as.factor(jk_flights$company)
-jk_flights$flight <- as.factor(jk_flights$flight)
-jk_flights$di <- as.factor(jk_flights$di)
-jk_flights$type <- as.factor(jk_flights$type)
-jk_flights$depart_sky_coverage <- as.factor(jk_flights$depart_sky_coverage)
-jk_flights$target <- as.factor(jk_flights$target)
+# Loading data
+jk_flights <- get_flight_data(2023, "SBBR")
 
 
 # Pre-processing
