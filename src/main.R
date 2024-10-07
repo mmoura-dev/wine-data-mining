@@ -73,9 +73,9 @@ model_evaluate <- function(model_name, model, df_train, df_test) {
 
 
 model_evaluate("Random Forest", cla_rf("target", slevels, mtry=9, ntree=81), df_train, df_test)
-model_evaluate("KNN", cla_knn("target", slevels, k=5), df_train, df_test)
+model_evaluate("KNN", cla_knn("target", slevels, k=1), df_train, df_test)
 # model_evaluate("Majority", cla_majority("target", slevels), df_train, df_test)
 # model_evaluate("Decision Tree", cla_dtree("target", slevels), df_train, df_test)
-model_evaluate("MLP", cla_mlp("target", slevels, size=3, decay=0.03), df_train, df_test)
+model_evaluate("MLP", cla_mlp("target", slevels, size=12, decay=0.1), df_train, df_test)
 model_evaluate("Naive Bayes", cla_nb("target", slevels), df_train, df_test)
 model_evaluate("SVM", cla_svm("target", slevels, epsilon=0.0,cost=20.000), df_train, df_test)
