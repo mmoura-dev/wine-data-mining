@@ -8,6 +8,7 @@ library(gridExtra)
 library(tidyverse)
 source("https://raw.githubusercontent.com/eogasawara/mylibrary/master/tutorial/graphics_extra.R")
 source("src/flights_data.R")
+source("src/confusion_matrix.R")
 
 
 # Loading data
@@ -51,45 +52,30 @@ df_train <- sr$train
 df_test <- sr$test
 
 
-# Model training
-# model <- cla_knn("target", slevels, k=1)
-model <- cla_rf("target", slevels, mtry=3, ntree=5)
-model <- fit(model, df_train)
-train_prediction <- predict(model, df_train)
+model_evaluate <- function(model_name, model, df_train, df_test) {
+  print(model_name)
+  model <- fit(model, df_train)
+  
+  
+  print("Model adjustment metrics")
+  train_prediction <- unlist(lapply(predict(model, df_train)[,2], function(x) ifelse(x > 0.1, 1, 0)))
+  df_train_predictand <- adjust_class_label(df_train[,"target"])[,2]
+  print(get_confusion_matrix(df_train_predictand, train_prediction))
+  
+  
+  print("Evaluation metrics")
+  test_prediction <- unlist(lapply(predict(model, df_test)[,2], function(x) ifelse(x > 0.1, 1, 0)))
+  df_test_predictand <- adjust_class_label(df_test[,"target"])[,2]
+  print(get_confusion_matrix(df_test_predictand, test_prediction))
+
+  # return (get_confusion_matrix(df_test_predictand, test_prediction))
+}
 
 
-# Model adjustment
-# df_train_predictand <- adjust_class_label(df_train[,"target"])
-# train_eval <- evaluate(model, df_train_predictand, train_prediction)
-# print(train_eval$metrics)
-
-
-# Model testing
-test_prediction <- predict(model, df_test)[,2]
-df_test_predictand <- adjust_class_label(df_test[,"target"])[,2]
-# test_eval <- evaluate(model, df_test_predictand, test_prediction)
-# print(test_eval$metrics)
-
-confusion_matrix <- table(df_test_predictand, test_prediction)
-
-# Accuracy
-accuracy <- sum(diag(confusion_matrix)) / sum(confusion_matrix)
-
-# Precision
-precision <- confusion_matrix[2, 2] / sum(confusion_matrix[, 2])
-
-# Recall (Sensitivity)
-recall <- confusion_matrix[2, 2] / sum(confusion_matrix[2, ])
-
-# F1 Score
-f1_score <- 2 * (precision * recall) / (precision + recall)
-
-# Results
-results <- data.frame(
-  Accuracy = accuracy,
-  Precision = precision,
-  Recall = recall,
-  F1_Score = f1_score
-)
-
-results
+model_evaluate("Random Forest", cla_rf("target", slevels, mtry=9, ntree=81), df_train, df_test)
+model_evaluate("KNN", cla_knn("target", slevels, k=5), df_train, df_test)
+# model_evaluate("Majority", cla_majority("target", slevels), df_train, df_test)
+# model_evaluate("Decision Tree", cla_dtree("target", slevels), df_train, df_test)
+model_evaluate("MLP", cla_mlp("target", slevels, size=3, decay=0.03), df_train, df_test)
+model_evaluate("Naive Bayes", cla_nb("target", slevels), df_train, df_test)
+model_evaluate("SVM", cla_svm("target", slevels, epsilon=0.0,cost=20.000), df_train, df_test)
